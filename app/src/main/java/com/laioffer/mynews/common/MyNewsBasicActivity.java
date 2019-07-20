@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.v7.app.AppCompatActivity;
 
-import com.laioffer.mynews.R;
-
 public abstract class MyNewsBasicActivity extends AppCompatActivity implements MyNewsFragmentManager {
     protected static final String BUNDLE = "bundle";
 
