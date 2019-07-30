@@ -35,12 +35,32 @@ public class ContainerFragment extends MyNewsBasicFragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = super.onCreateView(inflater, container, savedInstanceState);
-        TextView textView = view.findViewById(R.id.text);
-        textView.setText("This is containerFragment" + pageIndex);
-        return view;
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (initFragment != null && !initFragment.isAdded()) {
+            getChildFragmentManager().beginTransaction().replace(R.id.child_fragment_container,
+                    initFragment, getCurrentTag(pageIndex))
+                    .commit();
+        }
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        //replace old layout with child_fragment_container
+        return inflater.inflate(R.layout.child_fragment_container, container, false);
+    }
+
+    public static String getCurrentTag(int position) {
+        switch (position) {
+            case HOME_PAGE:
+                return HOME_PAGE_TAG;
+            case SAVE_PAGE:
+                return SAVE_PAGE_TAG;
+            case PROFILE_PAGE:
+                return PROFILE_PAGE_TAG;
+            default:
+                return null;
+        }
     }
 
     //add position index
