@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.laioffer.mynews.R;
+import com.laioffer.mynews.save.SavedNewsFragment;
 
 public class ContainerFragment extends MyNewsBasicFragment {
     //define containerFragment index and tag
@@ -20,11 +21,16 @@ public class ContainerFragment extends MyNewsBasicFragment {
     public static final String PROFILE_PAGE_TAG = "profile_page";
     private int pageIndex;
     //end here
-
+    //add initiFragment field
+    private Fragment initFragment;
 
     public static ContainerFragment newInstance(int pageIndex) {
         ContainerFragment containerFragment = new ContainerFragment();
         containerFragment.pageIndex = pageIndex;
+        //pass the value
+        containerFragment.initFragment = createInitFragmentByIndex
+                (pageIndex);
+
         return containerFragment;
     }
 
@@ -46,6 +52,19 @@ public class ContainerFragment extends MyNewsBasicFragment {
                 return SAVE_PAGE;
             case R.id.action_profile:
                 return PROFILE_PAGE;
+            default:
+                throw new IndexOutOfBoundsException();
+        }
+    }
+
+    private static Fragment createInitFragmentByIndex(int pageIndex) {
+        switch (pageIndex) {
+            case HOME_PAGE:
+                return null;
+            case SAVE_PAGE:
+                return SavedNewsFragment.newInstance();
+            case PROFILE_PAGE:
+                return null;
             default:
                 throw new IndexOutOfBoundsException();
         }
