@@ -22,6 +22,8 @@ public class MyNewsNoSwipeViewPager extends ViewPager {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        return super.onTouchEvent(event);
+        // Never allow swiping to switch between pages
+        return false;
+        // return super.onTouchEvent(event);
     }
 }

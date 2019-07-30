@@ -11,7 +11,16 @@ import android.widget.TextView;
 import com.laioffer.mynews.R;
 
 public class ContainerFragment extends MyNewsBasicFragment {
+    //define containerFragment index and tag
+    public static final int HOME_PAGE = 0;
+    public static final String HOME_PAGE_TAG = "home_page";
+    public static final int SAVE_PAGE = 1;
+    public static final String SAVE_PAGE_TAG = "save_page";
+    public static final int PROFILE_PAGE = 2;
+    public static final String PROFILE_PAGE_TAG = "profile_page";
     private int pageIndex;
+    //end here
+
 
     public static ContainerFragment newInstance(int pageIndex) {
         ContainerFragment containerFragment = new ContainerFragment();
@@ -28,4 +37,17 @@ public class ContainerFragment extends MyNewsBasicFragment {
         return view;
     }
 
+    //add position index
+    public static int getPositionById(int id) {
+        switch (id) {
+            case R.id.action_news:
+                return HOME_PAGE;
+            case R.id.action_save:
+                return SAVE_PAGE;
+            case R.id.action_profile:
+                return PROFILE_PAGE;
+            default:
+                throw new IndexOutOfBoundsException();
+        }
+    }
 }

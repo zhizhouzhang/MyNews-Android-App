@@ -36,6 +36,7 @@ public class MainActivity extends MyNewsBasicActivity {
                 return true;
             }
         });
+        //bottombar code end here
     }
 
     @Override
