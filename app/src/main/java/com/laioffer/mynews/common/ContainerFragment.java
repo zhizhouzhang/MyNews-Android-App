@@ -35,6 +35,12 @@ public class ContainerFragment extends MyNewsBasicFragment {
     }
 
     @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        //replace old layout with child_fragment_container
+        return inflater.inflate(R.layout.child_fragment_container, container, false);
+    }
+
+    @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (initFragment != null && !initFragment.isAdded()) {
@@ -42,12 +48,6 @@ public class ContainerFragment extends MyNewsBasicFragment {
                     initFragment, getCurrentTag(pageIndex))
                     .commit();
         }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        //replace old layout with child_fragment_container
-        return inflater.inflate(R.layout.child_fragment_container, container, false);
     }
 
     public static String getCurrentTag(int position) {

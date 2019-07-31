@@ -3,8 +3,10 @@ package com.laioffer.mynews;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentManager;
 import android.support.design.internal.BottomNavigationItemView;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 
 import com.laioffer.mynews.common.ContainerFragment;
 import com.laioffer.mynews.common.MyNewsBasicActivity;
+import com.laioffer.mynews.common.MyNewsBasicFragment;
 
 public class MainActivity extends MyNewsBasicActivity {
     private ViewPager viewPager;
@@ -39,9 +42,22 @@ public class MainActivity extends MyNewsBasicActivity {
         //bottombar code end here
     }
 
+    private FragmentManager getCurrentChildFragmentManager() {
+        return adapter.getItem(viewPager.getCurrentItem()).getChildFragmentManager();
+    }
+
     @Override
     protected int getLayout() {
         return R.layout.activity_main;
+    }
+
+    @Override
+    public void doFragmentTransaction(MyNewsBasicFragment basicFragment) {
+        FragmentTransaction fragmentTransaction = getCurrentChildFragmentManager().beginTransaction();
+        fragmentTransaction.replace(
+                R.id.child_fragment_container,
+                basicFragment,
+                basicFragment.getFragmentTag()).addToBackStack(null).commit();
     }
 
     @Override
